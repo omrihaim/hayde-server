@@ -25,8 +25,11 @@ const registerUser = asyncHandler(async (req, res) => {
         "email": user.email
     };
 
+    console.log("User object: ",userObject)
     const createdUser = await User.create(userObject);
 
+    console.log("createdUser object: ", createdUser)
+    
     if (createdUser) { // user object created successfully
         res.status(201).json({
             user: createdUser.toUserResponse()
