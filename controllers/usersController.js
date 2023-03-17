@@ -10,6 +10,8 @@ const bcrypt = require('bcrypt');
 // @return User
 const registerUser = asyncHandler(async (req, res) => {
     const { user } = req.body;
+    
+    System.out.println("Got registerUser request");
 
     // confirm data
     if (!user || !user.email || !user.username || !user.password) {
@@ -25,11 +27,11 @@ const registerUser = asyncHandler(async (req, res) => {
         "email": user.email
     };
 
-    console.log("User object: ",userObject)
+    System.out.println("User object: ",userObject)
     const createdUser = await User.create(userObject);
 
-    console.log("createdUser object: ", createdUser)
-    
+    System.out.println("createdUser object: ", createdUser)
+
     if (createdUser) { // user object created successfully
         res.status(201).json({
             user: createdUser.toUserResponse()
